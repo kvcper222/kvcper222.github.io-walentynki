@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dla Miłości Mojego Życia</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+
+    /* KARTKA W LINIE */
+    background-color: #fff;
+    background-image: 
+        linear-gradient(to bottom, transparent 28px, #b3d9ff 29px),
+        linear-gradient(to right, #ffb3b3 40px, transparent 40px);
+    background-size: 100% 30px, 100% 100%;
+}
+
+/* TŁO Z DATĄ */
+.background-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    opacity: 0.07;
+    font-size: 40px;
+    color: #ff5fa2;
+    pointer-events: none;
+    text-align: center;
+}
+
+.background-text span {
+    margin: 20px 40px;
+}
+
+/* SERDUSZKA */
+.heart {
+    position: absolute;
+    color: #ff5fa2;
+    animation: floatUp linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(100vh); opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* CONFETTI */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    opacity: 0.9;
+    animation: fall 2s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(300px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* KOPERTA */
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.envelope {
+    width: 350px;
+    height: 220px;
+    background: #ff5fa2;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 0 25px #ff5fa2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: -110px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 175px solid transparent;
+    border-right: 175px solid transparent;
+    border-bottom: 110px solid #ff5fa2;
+}
+
+.click-text {
+    position: absolute;
+    bottom: -40px;
+    width: 100%;
+    text-align: center;
+    color: #ff5fa2;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.letter {
+    position: absolute;
+    width: 300px;
+    height: 180px;
+    background: white;
+    border-radius: 10px;
+    top: 20px;
+    left: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff2e7e;
+    transform: translateY(100%);
+    transition: transform 0.7s;
+}
+
+.open .letter {
+    transform: translateY(-150px);
+}
+
+/* I LOVE YOU ANIMACJA */
+.love-text {
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+    font-family: cursive;
+    color: #ff2e7e;
+    opacity: 0;
+}
+
+.draw {
+    animation: write 2.5s steps(30) forwards, glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes write {
+    from {
+        width: 0;
+        opacity: 1;
+    }
+    to {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px #ff2e7e; }
+    to { text-shadow: 0 0 20px #ff2e7e; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-text">
+    <span>08.11.2025 <3</span>
+    <span>08.11.2025 <3</span>
+    <span>08.11.2025 <3</span>
+    <span>08.11.2025 <3</span>
+</div>
+
+<div class="love-text" id="loveText">I LOVE YOU</div>
+
+<div class="container" onclick="openEnvelope(this)">
+    <div class="letter">KOCHAM CIĘ IGUŚ</div>
+    <div class="envelope">
+        DO MIŁOŚCI<br>MOJEGO ŻYCIA
+    </div>
+    <div class="click-text">KLIKNIJ</div>
+</div>
+
+<script>
+function openEnvelope(element) {
+    element.classList.toggle("open");
+    createConfetti();
+    document.getElementById("loveText").classList.add("draw");
+}
+
+/* SERDUSZKA */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 300);
+
+/* CONFETTI */
+function createConfetti() {
+    const colors = ["#ff5fa2", "#ffd700", "#00c3ff", "#ff3c3c", "#8aff80"];
+    for (let i = 0; i < 80; i++) {
+        const conf = document.createElement("div");
+        conf.classList.add("confetti");
+        conf.style.background = colors[Math.floor(Math.random() * colors.length)];
+        conf.style.left = "50%";
+        conf.style.top = "50%";
+        conf.style.transform = `translate(${Math.random()*200-100}px, ${Math.random()*-200}px)`;
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 2000);
+    }
+}
+</script>
+
+</body>
+</html>
