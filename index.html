@@ -11,8 +11,6 @@ body {
     height: 100vh;
     overflow: hidden;
     font-family: Arial, sans-serif;
-
-    /* KARTKA W LINIE */
     background-color: #fff;
     background-image:
         linear-gradient(to bottom, transparent 28px, #b3d9ff 29px),
@@ -20,7 +18,7 @@ body {
     background-size: 100% 30px, 100% 100%;
 }
 
-/* SERDUSZKA W TLE */
+/* SERDUSZKA */
 .heart {
     position: absolute;
     color: #ff5fa2;
@@ -33,7 +31,7 @@ body {
     to { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* KONTENER */
+/* KONTAINER */
 .container {
     position: absolute;
     top: 50%;
@@ -57,6 +55,7 @@ body {
     font-weight: bold;
     text-align: center;
     font-size: 20px;
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 /* KLAPKA */
@@ -72,77 +71,15 @@ body {
     transition: transform 0.6s ease;
 }
 
-/* LIST (na początku ukryty) */
+/* LIST */
 .letter {
     position: absolute;
-    width: 300px;
-    height: 180px;
+    width: 340px;
+    height: 200px;
     background: white;
-    border-radius: 8px;
-    top: 20px;
-    left: 25px;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 120%);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 26px;
-    font-weight: bold;
-    color: #ff2e7e;
-    transform: translateY(120%);
-    opacity: 0;
-    transition: transform 0.7s ease, opacityiTrnas 0.7s ease;
-}
-
-/* PO OTWARCIU */
-.open .flap {
-    transform: rotateX(180deg);
-}
-
-.open .letter {
-    transform: translateY(-140px);
-    opacity: 1;
-}
-
-/* NAPIS KLIKNIJ */
-.click-text {
-    position: absolute;
-    bottom: -40px;
-    width: 100%;
-    text-align: center;
-    color: #ff2e7e;
-    letter-spacing: 2px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container" onclick="openEnvelope(this)">
-    <div class="letter">KOCHAM CIĘ IGUŚ</div>
-    <div class="envelope">
-        DO MIŁOŚCI<br>MOJEGO ŻYCIA
-        <div class="flap"></div>
-    </div>
-    <div class="click-text">KLIKNIJ</div>
-</div>
-
-<script>
-function openEnvelope(el) {
-    el.classList.toggle("open");
-}
-
-/* SERDUSZKA */
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}
-setInterval(createHeart, 400);
-</script>
-
-</body>
-</html>
+    justify-content: center
