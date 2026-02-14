@@ -11,6 +11,8 @@ body {
     height: 100vh;
     overflow: hidden;
     font-family: Arial, sans-serif;
+
+    /* Kartka w linię */
     background-color: #fff;
     background-image:
         linear-gradient(to bottom, transparent 28px, #cce6ff 29px),
@@ -22,8 +24,8 @@ body {
 .heart {
     position: absolute;
     color: #ff5fa2;
+    opacity: 0.5;
     animation: floatUp linear infinite;
-    opacity: 0.7;
 }
 
 @keyframes floatUp {
@@ -121,28 +123,13 @@ body {
     z-index: 4;
 }
 
-/* CONFETTI */
-.confetti {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    opacity: 0.9;
-    pointer-events: none;
-    animation: confettiFall 2s linear forwards;
-}
-
-@keyframes confettiFall {
-    to { transform: translateY(300px) rotate(720deg); opacity: 0; }
-}
-
 /* OTWARTE */
 .open .flap {
     transform: rotateX(180deg);
 }
 
 .open .letter {
-    transform: translate(-50%, -180%);
+    transform: translate(-50%, -180%); /* wysunięty do góry dla Instagrama */
     opacity: 1;
 }
 
@@ -155,6 +142,22 @@ body {
     .envelope { font-size: 6vw; }
     .letter { font-size: 6vw; }
     .love-text { font-size: 14vw; top: -25vw; }
+}
+
+/* CONFETTI */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: red;
+    border-radius: 50%;
+    opacity: 0.9;
+    pointer-events: none;
+    animation: fall 2s linear forwards;
+}
+
+@keyframes fall {
+    to { transform: translateY(300px) rotate(720deg); opacity: 0; }
 }
 </style>
 </head>
@@ -175,16 +178,11 @@ body {
 
 </div>
 
-<!-- MUZYKA (podmień źródło mp3) -->
-<audio id="music" src="music.mp3"></audio>
-
 <script>
 function openEnvelope(el) {
-    if(el.classList.contains("open")) return;
+    if(el.classList.contains("open")) return; // nie powtarzamy
     el.classList.add("open");
-
-    document.getElementById("music").play();  // włącza muzykę
-    createConfettiBlast();
+    createConfetti();
 }
 
 /* SERDUSZKA */
@@ -200,17 +198,18 @@ function createHeart() {
 }
 setInterval(createHeart, 500);
 
-/* KONFETTI WYSTRZAŁ */
-function createConfettiBlast() {
-    const colors = ["#ff5fa2","#ffd700","#00c3ff","#ff3c3c","#8aff80"];
-    for(let i=0; i<100; i++){
-        const conf = document.createElement("div");
-        conf.classList.add("confetti");
+/* CONFETTI Z KOPERTY */
+function createConfetti() {
+    const colors = ["#ff5fa2", "#ffd700", "#00c3ff", "#ff3c3c", "#8aff80"];
+    const container = document.querySelector('.envelope-container');
+    for(let i=0;i<50;i++){
+        const conf = document.createElement('div');
+        conf.classList.add('confetti');
         conf.style.background = colors[Math.floor(Math.random()*colors.length)];
         conf.style.left = "50%";
         conf.style.top = "50%";
-        conf.style.transform = `translate(${Math.random()*300-150}px, ${Math.random()*-300}px)`;
-        document.body.appendChild(conf);
+        conf.style.transform = `translate(${Math.random()*200-100}px, ${Math.random()*-200}px)`;
+        container.appendChild(conf);
         setTimeout(()=>conf.remove(),2000);
     }
 }
