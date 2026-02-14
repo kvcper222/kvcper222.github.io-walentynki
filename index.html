@@ -48,6 +48,7 @@ body {
     height: 230px;
     cursor: pointer;
     transition: transform 0.6s ease;
+    z-index: 1;
 }
 
 .envelope {
@@ -64,6 +65,7 @@ body {
     font-weight: bold;
     text-align: center;
     font-size: 20px;
+    z-index: 1;
 }
 
 /* KLAPKA */
@@ -78,6 +80,7 @@ body {
     border-top: 115px solid #ff6fae;
     transform-origin: top;
     transition: transform 0.6s ease;
+    z-index: 2;
 }
 
 /* LIST */
@@ -99,6 +102,7 @@ body {
     opacity: 0;
     transition: transform 0.8s ease, opacity 0.8s ease;
     box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    z-index: 3; /* LIST NAJWAŻNIEJSZY */
 }
 
 /* I LOVE YOU */
@@ -112,6 +116,7 @@ body {
     color: #ff2e7e;
     opacity: 0;
     transition: opacity 1s ease;
+    z-index: 4;
 }
 
 /* OTWARTE */
@@ -120,7 +125,7 @@ body {
 }
 
 .open .letter {
-    transform: translateY(-40px);
+    transform: translate(-50%, -40px);
     opacity: 1;
 }
 
